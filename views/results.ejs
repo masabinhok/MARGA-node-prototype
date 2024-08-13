@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bus Search Results</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: fadeInDown 1s ease-out;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 80%;
+        max-width: 600px;
+      }
+
+      li {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      li:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      p {
+        font-size: 1rem;
+        color: #d1e8ff;
+        margin-top: 10px;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .no-buses {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-top: 20px;
+        color: #ffd700;
+        animation: shake 0.5s ease-in-out;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25%,
+        75% {
+          transform: translateX(-10px);
+        }
+        50% {
+          transform: translateX(10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Available Buses</h1>
+    <% if (buses.length > 0) { %>
+    <ul>
+      <% buses.forEach(bus => { %>
+      <li>
+        <strong><%= bus.yatayat %></strong>
+        <p>Route: <%= bus.start_point %> to <%= bus.end_point %></p>
+        <p>Via: <%= bus.intermediate_destinations.join(", ") %></p>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p class="no-buses">No buses found matching your route.</p>
+    <% } %>
+  </body>
+</html>
